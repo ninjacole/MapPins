@@ -7,8 +7,8 @@
     <ProjectGuid>{DEAF4438-8089-40ED-8175-398E1261D45B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>JotunnModStub</RootNamespace>
-    <AssemblyName>JotunnModStub</AssemblyName>
+    <RootNamespace>AutoMapPins</RootNamespace>
+    <AssemblyName>AutoMapPins</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -81,8 +81,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\PinOptions.cs" />
+    <Compile Include="Context\PinRulesContext.cs" />
+    <Compile Include="Logging\AutoMapPinsLogger.cs" />
+    <Compile Include="Models\PinRule.cs" />
+    <Compile Include="Patches\ChatCommandPatch.cs" />
+    <Compile Include="Patches\DungeonPatch.cs" />
+    <Compile Include="Patches\HoverPatch.cs" />
+    <Compile Include="Patches\PickablePatch.cs" />
     <Compile Include="Properties\IgnoreAccessModifiers.cs" />
-    <Compile Include="JotunnModStub.cs" />
+    <Compile Include="Services\PinRulesService.cs" />
+    <Compile Include="Services\PinService.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -108,6 +118,9 @@
       $(BuildDependsOn);
       JotunnPostBuildTaskWin
     </BuildDependsOn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>copy $(TargetDir)$(TargetFileName) $(BEP_SCRIPT_DIR)\$(TargetFileName) /Y</PreBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureEnvironmentPropsImport" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
